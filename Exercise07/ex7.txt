@@ -1,0 +1,33 @@
+Exercise 7 Observation - IT24103439
+
+Output
+work@LEGION:/mnt/c/Users/Work/Desktop/Lab08/SE3082-2026-Sem02-Lab08/Exercise07$ mpirun -np 1 ./pi_bsend
+Processes           : 1
+Total Points        : 10000000
+Points Inside Circle: 7851764
+Estimated Pi        : 3.14071
+Execution Time      : 0.167309 seconds
+work@LEGION:/mnt/c/Users/Work/Desktop/Lab08/SE3082-2026-Sem02-Lab08/Exercise07$ mpirun -np 2 ./pi_bsend
+Processes           : 2
+Total Points        : 10000000
+Points Inside Circle: 7855874
+Estimated Pi        : 3.14235
+Execution Time      : 0.0856171 seconds
+work@LEGION:/mnt/c/Users/Work/Desktop/Lab08/SE3082-2026-Sem02-Lab08/Exercise07$ mpirun -np 4 ./pi_bsend
+Processes           : 4
+Total Points        : 10000000
+Points Inside Circle: 7855968
+Estimated Pi        : 3.14239
+Execution Time      : 0.0423726 seconds
+work@LEGION:/mnt/c/Users/Work/Desktop/Lab08/SE3082-2026-Sem02-Lab08/Exercise07$ mpirun -np 8 ./pi_bsend
+Processes           : 8
+Total Points        : 10000000
+Points Inside Circle: 7856100
+Estimated Pi        : 3.14244
+Execution Time      : 0.0216567 seconds
+
+Observation
+Implementing Buffered Send (MPI_Bsend) along with MPI_ANY_SOURCE allowed worker processes to immediately place their computed partial counts into attached memory buffers and complete their send operations without waiting for Rank 0 to match them directly.
+The program produced accurate approximations of Pi around 3.142 across all process counts.
+The execution time scaled down smoothly from about 0.167 seconds on 1 process to 0.021 seconds on 8 processes.
+This confirms that buffering outbound data combined with order-independent message receiving keeps processor idle time to a minimum and provides optimal parallel throughput.
