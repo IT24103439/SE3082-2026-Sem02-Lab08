@@ -1,0 +1,32 @@
+Exercise 6 Observation - IT24103439
+
+Output
+work@LEGION:/mnt/c/Users/Work/Desktop/Lab08/SE3082-2026-Sem02-Lab08/Exercise06$ mpirun -np 1 ./pi_any_source
+Processes           : 1
+Total Points        : 10000000
+Points Inside Circle: 7856482
+Estimated Pi        : 3.14259
+Execution Time      : 0.169337 seconds
+work@LEGION:/mnt/c/Users/Work/Desktop/Lab08/SE3082-2026-Sem02-Lab08/Exercise06$ mpirun -np 2 ./pi_any_source
+Processes           : 2
+Total Points        : 10000000
+Points Inside Circle: 7853644
+Estimated Pi        : 3.14146
+Execution Time      : 0.0847166 seconds
+work@LEGION:/mnt/c/Users/Work/Desktop/Lab08/SE3082-2026-Sem02-Lab08/Exercise06$ mpirun -np 4 ./pi_any_source
+Processes           : 4
+Total Points        : 10000000
+Points Inside Circle: 7854502
+Estimated Pi        : 3.1418
+Execution Time      : 0.047001 seconds
+work@LEGION:/mnt/c/Users/Work/Desktop/Lab08/SE3082-2026-Sem02-Lab08/Exercise06$ mpirun -np 8 ./pi_any_source
+Processes           : 8
+Total Points        : 10000000
+Points Inside Circle: 7854670
+Estimated Pi        : 3.14187
+Execution Time      : 0.0231496 seconds
+
+Observation
+By replacing the fixed source ranks with MPI_ANY_SOURCE, Rank 0 was able to receive data from whichever worker process completed its random point evaluations first on a first-come, first-served basis.
+The accuracy of the estimated Pi remained consistently near 3.141 across all process counts.
+Compared to Exercise 3, the execution time decreased even further (reaching approximately 0.023 seconds on 8 processes compared to 0.042 seconds in Exercise 3), demonstrating that non-blocking or order-independent message gathering reduces waiting time and idle synchronization delays.
