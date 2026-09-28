@@ -1,0 +1,40 @@
+Exercise 5 Observation - IT24103439
+
+Part 1 - Output
+work@LEGION:/mnt/c/Users/Work/Desktop/Lab08/SE3082-2026-Sem02-Lab08/Exercise05$ mpirun -np 2 ./mismatch
+Process 1 waiting for message from Process 2 (MISMATCH)...
+Process 0 sending to Process 1...
+Process 0 successfully completed MPI_Send.
+[LEGION:00000] *** An error occurred in MPI_Recv
+[LEGION:00000] *** reported by process [123469825,1]
+[LEGION:00000] *** on communicator MPI_COMM_WORLD
+[LEGION:00000] *** MPI_ERR_RANK: invalid rank
+[LEGION:00000] *** MPI_ERRORS_ARE_FATAL (processes in this communicator will now abort,
+[LEGION:00000] ***    and MPI will try to terminate your MPI job as well)
+--------------------------------------------------------------------------
+Sorry!  You were supposed to get help about:
+    prun:proc-ordered-abort
+But I couldn't open the help file:
+    /usr/lib/x86_64-linux-gnu/pmix2/share/pmix/help-prun.txt: No such file or directory
+    /usr/lib/x86_64-linux-gnu/prrte3/share/prte/help-prun.txt: No such file or directory.
+Sorry!
+--------------------------------------------------------------------------
+
+Observation
+When the source rank specified in the receive call does not match the actual sender, the program fails to communicate properly.
+In this test, Process 1 tried to receive a message from Process 2 while running with only 2 processes.
+The MPI runtime flagged an invalid rank error (MPI_ERR_RANK) and aborted execution immediately because Rank 2 did not exist.
+
+Part 2 - Output
+work@LEGION:/mnt/c/Users/Work/Desktop/Lab08/SE3082-2026-Sem02-Lab08/Exercise05$ mpirun -np 2 ./bsend
+Process 0 buffered and sent 0
+Process 0 buffered and sent 10
+Process 0 buffered and sent 20
+Process 1 received 0
+Process 1 received 10
+Process 1 received 20
+
+Observation
+Using MPI_Bsend allowed Process 0 to immediately copy each value into the attached memory buffer and overwrite the single number variable across loop iterations without corrupting or losing data.
+Process 1 received all three values (0, 10, 20) in the correct order.
+The buffer detach step ensured that all queued messages were fully transmitted over the network before the buffer was freed and the program terminated.
