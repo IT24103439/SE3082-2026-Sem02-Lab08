@@ -1,0 +1,6 @@
+Exercise 4 Observation - IT24103439
+
+The graphs clearly show that adding more processors reduces execution time and increases speedup for both exercises.
+Exercise 3 takes longer overall but scales almost linearly, reaching more than 7x speedup on 8 processors because it does pure calculations in parallel.
+Exercise 2 also shows good speedup, but it is slightly lower because its total task takes only a few milliseconds, making the MPI communication overhead more noticeable.
+Overall, both programs prove that dividing work across multiple cores significantly improves performance.
