@@ -1,0 +1,37 @@
+Exercise 3 Observation - IT24103439
+
+Output
+work@LEGION:/mnt/c/Users/Work/Desktop/Lab08/SE3082-2026-Sem02-Lab08$ mpirun -np 1 ./pi_monte_carlo
+Processes          : 1
+Total Points       : 10000000
+Points Inside Circle: 7854805
+Estimated Pi       : 3.14192
+Execution Time     : 0.296061 seconds
+work@LEGION:/mnt/c/Users/Work/Desktop/Lab08/SE3082-2026-Sem02-Lab08$ mpirun -np 2 
+./pi_monte_carlo
+Processes          : 2
+Total Points       : 10000000
+Points Inside Circle: 7855910
+Estimated Pi       : 3.14236
+Execution Time     : 0.152737 seconds
+work@LEGION:/mnt/c/Users/Work/Desktop/Lab08/SE3082-2026-Sem02-Lab08$ mpirun -np 4 
+./pi_monte_carlo
+Processes          : 4
+Total Points       : 10000000
+Points Inside Circle: 7853033
+Estimated Pi       : 3.14121
+Execution Time     : 0.0791147 seconds
+work@LEGION:/mnt/c/Users/Work/Desktop/Lab08/SE3082-2026-Sem02-Lab08$ mpirun -np 8
+./pi_monte_carlo
+Processes          : 8
+Total Points       : 10000000
+Points Inside Circle: 7854029
+Estimated Pi       : 3.14161
+Execution Time     : 0.042303 seconds
+work@LEGION:/mnt/c/Users/Work/Desktop/Lab08/SE3082-2026-Sem02-Lab08$
+
+Observation
+The program successfully estimated Pi to around 3.141 using 10 000 000 random points.
+Each run gave a slightly different value because the random numbers were seeded differently on each process, but all results were very close to 3.14159.
+As the number of processes increased from 1 to 8, the execution time decreased steadily from about 0.296 seconds down to 0.042 seconds.
+This shows strong parallel speedup because the independent random number generation was divided evenly across the available CPU cores.
