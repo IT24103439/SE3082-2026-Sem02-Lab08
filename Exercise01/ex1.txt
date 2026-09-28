@@ -1,0 +1,28 @@
+Exercise 1 Observation - IT24103439
+
+Output
+work@LEGION:/mnt/c/Users/Work/Desktop/Lab08/SE3082-2026-Sem02-Lab08$ mpicxx -o job1 HelloMPI.c
+work@LEGION:/mnt/c/Users/Work/Desktop/Lab08/SE3082-2026-Sem02-Lab08$ mpirun -np 2 ./job1
+Just a normal process From rank 1 machine LEGION
+Hello World! From rank 0 machine LEGION
+work@LEGION:/mnt/c/Users/Work/Desktop/Lab08/SE3082-2026-Sem02-Lab08$ mpirun -np 4 ./job1
+Just a normal process From rank 3 machine LEGION
+Just a normal process From rank 2 machine LEGION
+Just a normal process From rank 1 machine LEGION
+Hello World! From rank 0 machine LEGION
+work@LEGION:/mnt/c/Users/Work/Desktop/Lab08/SE3082-2026-Sem02-Lab08$ mpirun -np 7 ./job1
+Just a normal process From rank 6 machine LEGION
+Hello World! From rank 0 machine LEGION
+Just a normal process From rank 3 machine LEGION
+Just a normal process From rank 5 machine LEGION
+Just a normal process From rank 2 machine LEGION
+Just a normal process From rank 4 machine LEGION
+Just a normal process From rank 1 machine LEGION
+work@LEGION:/mnt/c/Users/Work/Desktop/Lab08/SE3082-2026-Sem02-Lab08$ 
+
+Observation
+When running the program with different numbers of processes (2, 4, and 7), each process correctly identified its unique rank and printed the hostname "LEGION".
+Rank 0 always printed the "Hello World" message, while the other ranks printed "Just a normal process".
+I also observed that the output lines were printed out of order when using more processes.
+For example, with 7 processes, rank 6 printed before rank 0.
+This shows that the processes run at the same time independently and the order of printing depends on how the CPU schedules them rather than their rank number.
